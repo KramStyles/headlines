@@ -1,0 +1,29 @@
+{% include 'header.html' %}
+<body>
+    <div class="jumbotron text-center text-dark">
+        <h1 class="text-uppercase">{{ header }} Headlines</h1>
+    </div>
+    <div class="container-fluid">
+        <table class="table table-striped">
+            {% for newsFeed in newsFeeds %}
+                <tr>
+                    <td>Title: </td>
+                    <td><b><a href="{{ newsFeed.link }}">{{ newsFeed.title }}</a></b></td>
+                </tr>
+                <tr>
+                    <td>Date Published: </td>
+                    <td>{{ newsFeed.published }}</td>
+                </tr>
+                <tr>
+                    <td>Summary: </td>
+                    <td>{{ newsFeed.summary }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</body>
