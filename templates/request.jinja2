@@ -1,0 +1,41 @@
+{% include 'header.html' %}
+<body>
+    <div class="jumbotron text-center text-dark">
+        <h1 class="text-uppercase">{{ header }} Headlines</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <form method = 'get'>
+            <div class="form-group">
+                <label for="agency">News Agency:</label>
+                <input type="text" class="form-control" id="agency" name="agency"/>
+            </div>
+            <input type="submit" value="Submit Query" class="btn btn-dark btn-block"/>
+        </form>
+        </div>
+    <hr>
+        <div class="row">
+            <table class="table table-striped">
+            {% for newsFeed in newsFeeds %}
+                <tr>
+                    <td>Title: </td>
+                    <td><b><a href="{{ newsFeed.link }}">{{ newsFeed.title }}</a></b></td>
+                </tr>
+                <tr>
+                    <td>Date Published: </td>
+                    <td>{{ newsFeed.published }}</td>
+                </tr>
+                <tr>
+                    <td>Summary: </td>
+                    <td>{{ newsFeed.summary }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+
+        </table>
+        </div>
+    </div>
+</body>
