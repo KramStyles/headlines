@@ -1,33 +1,117 @@
 {% include 'header.html' %}
+<style>
+    .sidemarg {
+        margin: 0 10px;
+    }
+
+    .topmarg {
+        margin: 20px 0 0;
+    }
+    .input100{
+        width: 100% !important;
+        }
+    .input50{
+        width: 48% !important;
+        }
+    .input25{
+        width: 25% !important;
+        }
+</style>
 <body>
-    <div class="jumbotron text-center text-dark">
-        <h1 class="text-uppercase">{{ header }} Headlines</h1>
-    </div>
-    <div class="container">
-        <div class="row">
-            <form method = 'get'>
-            <div class="form-group">
-                <label for="agency">News Agency:</label>
-                <input type="text" class="form-control" id="agency" name="agency"/>
+<div class="jumbotron text-center text-dark">
+    <h1 class="text-uppercase">{{ header }} Headlines</h1>
+    <h3 class="text-uppercase">City: {{ rtns.name }}</h3>
+    <p class="text-capitalize">{{ rtns.weather.0.description }} | {{ rtns.main['temp'] }}&#8451;
+        | {{ city }}, {{ rtns.sys.country }}</p>
+    <p class="text-uppercase">1{{ curr.base }} = &#8358;{{ curr.rates.NGN }} </p>
+    <p class="text-uppercase text-success font-weight-bold">{{ value }}</p>
+</div>
+<div class="container">
+    <div class="row">
+        <form method='get' class="form-inline" style="margin:auto">
+            <div class="col-6">
+                <input type="text" class="form-control input100" id="agency" name="agency" placeholder="Choose News Agency:"/>
             </div>
-            <input type="submit" value="Submit Query" class="btn btn-dark btn-block"/>
+{#            <input type="submit" value="Submit Query" class="btn btn-dark btn-block"/>#}
+{#        </form>#}
+{#        <form method='get'>#}
+            <div class="col-6">
+                <input type="text" class="form-control input100" id="city" name="city" placeholder="Choose City:"/>
+            </div>
+{#            <input type="submit" value="<Submit></Submit> Query" class="btn btn-dark btn-block"/>#}
+{#        </form>#}
+{#        <form class="form-inline sidemarg">#}
+        <br> <br> <br>
+            <div class="col-12">
+                <select class="form-control input25" name="currFrom">
+                    <option value="">Pick a Currency</option>
+                    {% for foo in curr.rates %}
+                        <option value="{{ foo }}">{{ foo }}</option>
+                    {% endfor %}
+                </select>
+                <select class="form-control input25" name="currTo">
+                    <option value="">Pick a Currency</option>
+                    {% for foo in curr.rates %}
+                        <option value="{{ foo }}">{{ foo }}</option>
+                    {% endfor %}
+                </select>
+                <input type="text" class="form-control input50" name="result" readonly value="1{{ currFrom }} = {{ currValue }}{{ currTo }}" width="70%"/>
+                <input type="submit" value="Submit Query" class="btn btn-success btn-block topmarg"/>
+            </div>
         </form>
-        </div>
+    </div>
     <hr>
-        <div class="row">
-            <table class="table table-striped">
+    <div class="row">
+        <table width="50%" class="table">
+            <tr>
+                <th width="10%">City Name</th>
+                <th>{{ rtns.name }}</th>
+            </tr>
+            <tr>
+                <td width="5%">Longitude.</td>
+                <td>{{ rtns.coord['lon'] }}</td>
+            </tr>
+            <tr>
+                <td width="20%">Latitude</td>
+                <td>{{ rtns.coord['lat'] }}</td>
+            </tr>
+            <tr>
+                <td width="20%">Weather Condition</td>
+                <td>{{ rtns['weather'][0]['main'] }}</td>
+            </tr>
+            <tr>
+                <td width="20%">Description</td>
+                <td>{{ rtns.weather.0.description }}</td>
+            </tr>
+            <tr>
+                <td width="20%">Temperature</td>
+                <td>{{ rtns.main['temp'] }}</td>
+            </tr>
+        </table>
+        <table class="table table-striped">
             {% for newsFeed in newsFeeds %}
                 <tr>
-                    <td>Title: </td>
-                    <td><b><a href="{{ newsFeed.link }}">{{ newsFeed.title }}</a></b></td>
+                    <td rowspan="3" width="20%">{% if header == 'iol' or header == 'fox' %}
+                        <img src="{{ newsFeed.media_content.0.url }}" alt="thumbnail" width="100%" height="150px"/>
+                    {% endif %}
+                        {% if header == 'cnn' %}
+                            <h5>cnn
+                                <small>{{ newsFeed.media_content }}</small>
+                            </h5>
+                        {% endif %}
+                    </td>
+                    <td>Title:</td>
+                    <td colspan="3"><b><a href="{{ newsFeed.link }}">{{ newsFeed.title }}</a></b></td>
                 </tr>
                 <tr>
-                    <td>Date Published: </td>
-                    <td>{{ newsFeed.published }}</td>
+                    <td>Date Published:</td>
+                    <td><b>{{ newsFeed.published }}</b></td>
+                    <td>Author:</td>
+                    <td><b>{{ newsFeed.author }}</b></td>
                 </tr>
                 <tr>
-                    <td>Summary: </td>
-                    <td>{{ newsFeed.summary }}</td>
+                    <td>Summary:</td>
+                    <td colspan="3">{{ newsFeed.summary }}</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -36,6 +120,6 @@
             {% endfor %}
 
         </table>
-        </div>
     </div>
+</div>
 </body>

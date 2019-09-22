@@ -1,0 +1,50 @@
+{% include 'header.html' %}
+<body>
+<div class="jumbotron">
+    <h1>City: {{ city }}</h1>
+    {% for (foo) in rtns %}
+        <pre>{{ foo }}:{{ rtns[foo] }}</pre>
+    {% endfor %}
+</div>
+<div class="container">
+    <form>
+        <form method = 'get'>
+            <div class="form-group">
+                <label for="city">News Agency:</label>
+                <input type="text" class="form-control" id="city" name="city"/>
+            </div>
+            <input type="submit" value="Submit Query" class="btn btn-dark btn-block"/>
+        </form>
+    </form>
+    <div class="table-responsive">
+        <table width="100%" class="table">
+            <tr>
+                <th width="20%">City Name</th>
+                <th>{{ rtns.name }}</th>
+            </tr>
+            <tr>
+                <td width="20%">Longitude</td>
+                <td>{{ rtns.coord['lon'] }}</td>
+            </tr>
+            <tr>
+                <td width="20%">Latitude</td>
+                <td>{{ rtns.coord['lat'] }}</td>
+            </tr>
+            <tr>
+                <td width="20%">Weather Condition</td>
+                <td>{{ rtns['weather'][0]['main'] }}</td>
+            </tr>
+            <tr>
+                <td width="20%">Description</td>
+                <td>{{ rtns.weather.0.description }}</td>
+            </tr>
+            <tr>
+                <td width="20%">Temperature</td>
+                <td>{{ rtns.main['temp'] }}</td>
+            </tr>
+        </table>
+    </div>
+
+
+</div>
+</body>
