@@ -28,7 +28,7 @@ DEFAULTS = {
 def index(article='bbc'):
     feed = feedparser.parse(rssFeeds[article])
     # first = feed['entries'][0]
-    return render_template('home.jinja2', header=article, title=article.upper() + ' News Feed',
+    return render_template('home.jinja2', header=article, title=article,
                            newsFeeds=feed['entries'])
 
 
