@@ -1,9 +1,25 @@
 {% include 'header.html' %}
 <body>
-    <div class="jumbotron text-center text-dark">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+            <a class="nav-link" href="/bbc">BBC</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/fox">FOX</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="iol">IOL</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link disabled" href="/cnn">CNN</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="jumbotron text-center text-light bg-dark">
         <h1 class="text-uppercase">{{ header }} Headlines</h1>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid mb-5">
         <table class="table table-striped">
             {% for newsFeed in newsFeeds %}
                 <tr>
