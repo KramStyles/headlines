@@ -1,21 +1,33 @@
 {% include 'header.html' %}
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
-        <ul class="navbar-nav">
-            <li class="nav-item {% if title == 'bbc' %}active{% endif %}">
-            <a class="nav-link" href="/bbc">BBC</a>
-            </li>
-            <li class="nav-item {% if title == 'fox' %}active{% endif %}">
-            <a class="nav-link" href="/fox">FOX</a>
-            </li>
-            <li class="nav-item {% if title == 'iol' %}active{% endif %}">
-            <a class="nav-link" href="iol">IOL</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link disabled" href="javascript:;">CNN</a>
-            </li>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-bottom">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">HEADLINES</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item {% if title == 'bbc' %}active{% endif %}">
+                    <a class="nav-link" href="/bbc">BBC</a>
+                </li>
+                <li class="nav-item {% if title == 'fox' %}active{% endif %}">
+                   <a class="nav-link" href="/fox">FOX</a>
+                </li>
+                <li class="nav-item {% if title == 'iol' %}active{% endif %}">
+                     <a class="nav-link" href="iol">IOL</a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link disabled" href="javascript:;">CNN</a>
+                </li>
         </ul>
+        </div>
     </nav>
+
     <div class="jumbotron text-center text-light bg-dark">
         <h1 class="text-uppercase">{{ header }} Headlines</h1>
     </div>
